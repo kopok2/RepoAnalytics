@@ -41,10 +41,10 @@ get_file_type <- function(file_path){
 get_file_imports <- function(file_path, project_name){
   file_type <- get_file_type(file_path)
   if(file_type == "Other"){
-    return(list())
+    return(character())
   } else {
     if(file_type == "Python"){
-      imports <- list()
+      imports <- character()
       con = file(here("repos", project_name, file_path), "r")
       while ( TRUE ) {
         line = readLines(con, n = 1)
@@ -63,7 +63,7 @@ get_file_imports <- function(file_path, project_name){
             }
           }
           import_statement <- gsub(" ", "", import_statement)
-          print(import_statement)
+          imports <- c(imports, import_statement)
         }
       }
       
@@ -74,21 +74,45 @@ get_file_imports <- function(file_path, project_name){
 }
 
 
+
+make_graph <- function(imports, vertex){
+  edges <- matrix(nrow = 0, ncol = 2)
+  names(vertex) <- seq(length(vertex))
+  for(source_vertex in seq(length(imports))){
+    for(target_vertex in imports[source_vertex][[1]]){
+      target_id = which(target_vertex == vertex)
+      if(length(target_id) != 0){
+        edges <- rbind(edges, c(source_vertex, target_id))
+      } else {
+        edges <- rbind(edges, c(source_vertex, target_vertex))
+      }
+    }
+  }
+  colnames(edges) <- c('importer', 'imported')
+  edges
+}
+
+
+
 project_stats <- function(project_name){
   project_files <- list.files(here("repos", project_name), recursive = TRUE)
   project_names <- sapply(project_files, get_project_name)
   file_sizes <- sapply(project_files, get_file_info, project_name = project_name)
   file_types <- factor(sapply(project_files, get_file_type))
   file_imports <- sapply(project_files, get_file_imports, project_name = project_name)
+  import_counts <- sapply(file_imports, length)
+  names(file_imports) <- sapply(names(file_imports), get_project_name)
+  graph <- make_graph(file_imports, project_names)
   
+  print(graph)
   # Merge results
   result <- data.frame(row.names = seq.int(length(project_files)),
                        project_files,
                        project_names,
                        file_sizes,
-                       file_types)
+                       file_types,
+                       import_counts)
   
-  print(file_imports)
   
   result
 }
@@ -96,6 +120,6 @@ project_stats <- function(project_name){
 
 
 clear_repos_dir()
-clone_repo("https://github.com/kopok2/AcceleratedGradientBoosting")
+clone_repo("https://github.com/kopok2/MachineLearningAlgorithms")
 
-(project_stats("AcceleratedGradientBoosting"))
+head(project_stats("MachineLearningAlgorithms"))
