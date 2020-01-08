@@ -21,14 +21,29 @@ get_file_info <- function(file_path, project_name){
 }
 
 
+get_file_type <- function(file_path){
+  extension <- tail(unlist(strsplit(file_path, "[.]")), n=1)
+  file_type <- switch(extension,
+                      "py" = "Python",
+                      "R" = "R",
+                      "c" = "C",
+                      "js" = "JavaScript",
+                      "Other")
+
+  file_type
+}
+
+
 project_stats <- function(project_name){
   project_files <- list.files(here("repos", project_name), recursive = TRUE)
   file_sizes <- sapply(project_files, get_file_info, project_name = project_name)
-  print(file_infos)
+  file_types <- factor(sapply(project_files, get_file_type))
   
   # Merge results
-  result <- data.frame(project_files, file_infos)
-  print(result)
+  result <- data.frame(row.names = seq.int(length(project_files)),
+                       project_files, 
+                       file_sizes,
+                       file_types)
   
   result
 }
@@ -38,4 +53,4 @@ project_stats <- function(project_name){
 clear_repos_dir()
 clone_repo("https://github.com/kopok2/AcceleratedGradientBoosting")
 
-project_stats("AcceleratedGradientBoosting")
+(project_stats("AcceleratedGradientBoosting"))
