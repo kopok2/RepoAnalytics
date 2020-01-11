@@ -121,6 +121,11 @@ Aplikacja Shiny z modułem networkD3 umożliwiła nam zwizualizować strukturę 
 
 # Prezentacja wyników
 
+Aplikacja umożliwia wizualizacje w postaci grafu różnych cech plików (np. rozmiaru, typu, itd.).
+
+
+# Prezentacja wyników
+
 ![](screens/1.PNG)
 
 
@@ -140,6 +145,9 @@ Aplikacja Shiny z modułem networkD3 umożliwiła nam zwizualizować strukturę 
 ![](screens/4.PNG)
 
 
+# Prezentacja wyników
+
+Prezentowane projekty wykazują duże zróżnicowanie strukturalne. Występują pliki importowane przez dużą liczbę plików co seruje ich wysoką istotność.
 
 
 # Koniec

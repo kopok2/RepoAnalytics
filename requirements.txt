@@ -1,0 +1,5 @@
+shiny
+dplyr
+tidyr
+networkD3 # Wymaga kompilatora Fortrana
+here

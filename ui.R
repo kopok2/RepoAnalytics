@@ -23,7 +23,7 @@ tabpanel1 <-tabPanel('SDM', uiOutput('page1'),sidebarLayout(
                             value = 1),
                 
                 selectInput("group1", h3("Color by"), 
-                            choices = list("File type" = "file_types", "Numer of imports" = "import_counts"
+                            choices = list("Typ pliku" = "file_types", "Liczba importow" = "import_counts", "Rozmiar pliku" = "file_sizes"
                             ), selected = 2),
                 #add more conrol
                 checkboxInput("legend1", label = "Legenda", value = TRUE),
@@ -53,7 +53,7 @@ tabpanel2<-tabPanel('MachineLeariing', uiOutput('page2'),sidebarLayout(
                     value = 1),
         
         selectInput("group2", h3("Color by"), 
-                    choices = list("File type" = "file_types", "Numer of imports" = "import_counts"
+                    choices = list("Typ pliku" = "file_types", "Liczba importow" = "import_counts", "Rozmiar pliku" = "file_sizes"
                     ), selected = 2),
         ##add more control
         checkboxInput("legend2", label = "Legenda", value = TRUE),
@@ -113,7 +113,7 @@ tabpanel4<-tabPanel('python3-cookbook', uiOutput('page4'),sidebarLayout(
                     value = 1),
         
         selectInput("group4", h3("Color by"), 
-                    choices = list("File type" = "file_types", "Numer of imports" = "import_counts"
+                    choices = list("Typ pliku" = "file_types", "Liczba importow" = "import_counts", "Rozmiar pliku" = "file_sizes"
                     ), selected = 2),
         ##add more control
         checkboxInput("legend4", label = "Legenda", value = TRUE),
@@ -143,7 +143,7 @@ tabpanel5<-tabPanel('ImageAI', uiOutput('page5'),sidebarLayout(
                     value = 1),
         
         selectInput("group5", h3("Color by"), 
-                    choices = list("File type" = "file_types", "Numer of imports" = "import_counts"
+                    choices = list("Typ pliku" = "file_types", "Liczba importow" = "import_counts", "Rozmiar pliku" = "file_sizes"
                     ), selected = 2),
         ##add more control
         checkboxInput("legend5", label = "Legenda", value = TRUE),
