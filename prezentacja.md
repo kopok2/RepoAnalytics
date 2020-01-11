@@ -147,7 +147,7 @@ Aplikacja umożliwia wizualizacje w postaci grafu różnych cech plików (np. ro
 
 # Prezentacja wyników
 
-Prezentowane projekty wykazują duże zróżnicowanie strukturalne. Występują pliki importowane przez dużą liczbę plików co seruje ich wysoką istotność.
+Prezentowane projekty wykazują duże zróżnicowanie strukturalne. Występują pliki importowane przez dużą liczbę plków co sugeruje ich wysoką istotność.
 
 
 # Koniec
