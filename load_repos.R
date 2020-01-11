@@ -8,6 +8,7 @@ clone_repo <- function(repo_url){
   repo_name <- tail(unlist(strsplit(repo_url, "/")), n=1)
   print(repo_name)
   system(paste("git clone ", repo_url, " ", here("repos"), "/", repo_name, sep = ""))
+  return(repo_name)
 }
 
 
@@ -94,7 +95,7 @@ make_graph <- function(imports, vertex){
 
 
 
-project_stats <- function(project_name){
+SaveDataAsCSV <- function(project_name){
   project_files <- list.files(here("repos", project_name), recursive = TRUE)
   project_names <- sapply(project_files, get_project_name)
   file_sizes <- sapply(project_files, get_file_info, project_name = project_name)
@@ -104,7 +105,6 @@ project_stats <- function(project_name){
   names(file_imports) <- sapply(names(file_imports), get_project_name)
   graph <- make_graph(file_imports, project_names)
   
-  print(graph)
   # Merge results
   result <- data.frame(row.names = seq.int(length(project_files)),
                        project_files,
@@ -113,13 +113,24 @@ project_stats <- function(project_name){
                        file_types,
                        import_counts)
   
-  
-  result
+  #set your own working directory 
+  WorkingDirectory <- paste(here(),"/",sep = "")
+  path <- paste(WorkingDirectory,project_name,sep = "")
+  print(path)
+  dir.create(path)
+  write.csv(graph,paste(path,"/GraphEdges.csv" ,sep = ""))
+  write.csv(result,paste(path,"/GraphData.csv", sep = ""))
 }
 
+MakeGraphData <- function(giturl){
+  clear_repos_dir()
+  name <- clone_repo(giturl)
+  SaveDataAsCSV(name)
+  return(name)
+}
 
-
-clear_repos_dir()
-clone_repo("https://github.com/kopok2/MachineLearningAlgorithms")
-
-head(project_stats("MachineLearningAlgorithms"))
+#MakeGraphData("https://github.com/kopok2/MachineLearningAlgorithms")
+#MakeGraphData("https://github.com/skuam/PySDM")
+#MakeGraphData("https://github.com/Kozea/Pyphen")
+#MakeGraphData("https://github.com/yidao620c/python3-cookbook")
+#MakeGraphData("https://github.com/OlafenwaMoses/ImageAI")
