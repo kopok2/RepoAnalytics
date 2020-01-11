@@ -12,7 +12,7 @@ library(shiny)
 library(dplyr)
 library(tidyr)
 library(networkD3)
-library(plyr)
+
 
 tabpanel1 <-tabPanel('SDM', uiOutput('page1'),sidebarLayout(
             sidebarPanel(

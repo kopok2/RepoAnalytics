@@ -15,8 +15,11 @@ library(here)
 
 LoadEdges <- function(name,type){
     #set your own working directory 
-    WorkingDirectory <-  paste(here::here(),"RepoAnalytics/",sep = "/")
-    
+    if(Sys.info()["sysname"] == "Windows"){
+        WorkingDirectory <-  paste(here::here(),"/",sep = "/")
+    }else{
+        WorkingDirectory <-  paste(here::here(),"RepoAnalytics/",sep = "/")
+    }
     path = paste(WorkingDirectory,name,sep = "")
     print(path)
     dane <- read.csv(file = paste(path,type,sep = ""),header = TRUE)%>%as_data_frame()
