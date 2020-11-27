@@ -5,13 +5,13 @@ RShiny application for exploratory analysis of source code dependencies in Git r
 ![S1](screens/1.PNG)
 
 
-![S2](screens/1.PNG)
+![S2](screens/2.PNG)
 
 
-![S3](screens/1.PNG)
+![S3](screens/3.PNG)
 
 
-![S4](screens/1.PNG)
+![S4](screens/4.PNG)
 
 Project prepared as a university project for R programming class.
 
